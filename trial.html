@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html ng-app = "store">
+<head>
+	<title> MyJackieLabs </title>
+	<link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
+	<script src="js/jquery.min.js"> </script>
+	<script src="js/angular.js"> </script>
+	<script src="js/bootstrap.min.js"> </script>
+<style>
+.ng-invalid.ng-dirty {
+ border-color: #FA787E;
+}
+.ng-valid.ng-dirty {
+ border-color: #78FA89;
+}
+</style>
+<script>
+		var app = angular.module('store', []);
+		
+		/* app.controller("dateController",function($scope){
+			var updateClock = function(){
+				$scope.clock = new Date();
+			};
+			setInterval(function(){
+				$scope.apply(updateClock);
+			},500);
+			updateClock();
+		}); */
+		app.controller('FirstController',function($scope){
+			$scope.counter = 5;
+			$scope.add = function(counter){
+				$scope.counter+= counter;
+			};
+			$scope.sub = function(counter){
+				$scope.counter-= counter;
+			};
+		});
+		app.controller('ParseController',function($scope,$parse){
+			$scope.$watch('expr',function(newval,oldval,scope){
+				if(newval != oldval) {
+					var trial = $parse(newval);
+					$scope.parsedValue = trial(scope);
+				}
+			});
+		
+		});
+</script>
+</head>
+<body>
+	<div class="form-group" ng-controller="FirstController">
+	  <h2> Simple example to increase and descrease the size </h2>
+	  <button ng-click="add(1)"> Add </button>
+	  <button ng-click="sub(1)"> Subtract </button>
+	  <h3> {{ counter }} </h3>
+	</div>
+	<div ng-controller="ParseController">
+		<input ng-model="expr">
+		<h2> {{ parsedValue }}  </h2>
+	</div>
+	
+</body>
+</html>

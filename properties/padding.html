@@ -1,0 +1,34 @@
+	<div class="col-md-3 range" style="height:700px; padding:0 ;">
+		<div class="logo white center"> <span class="glyphicon glyphicon-edit left-space"> </span> Property Value </div>
+		<ul class="nav nav-pills nav-stacked prop-val">
+			<li>
+				<div class="mt prop-head">
+					<span class="glyphicon glyphicon-arrow-up"> </span> <span class="badge pull-right">{{paddingtop}}</span>padding-top 
+				</div> 
+				<input type="range" data-ng-model="paddingtop" value="25" max="200" min="0"> 
+			</li>
+			<li> <div class="gt prop-head">
+				<span class="glyphicon glyphicon-arrow-right"> </span> <span class="badge pull-right">{{paddingright}}</span> padding-Right 
+				</div>
+				<input type="range" data-ng-model="paddingright" value="25" max="200" min="0"> 
+			</li>
+			<li> <div class="vt prop-head"> 
+					<span class="glyphicon glyphicon-arrow-down"> </span> <span class="badge pull-right">{{paddingbottom}}</span> padding-Bottom 
+				</div> 
+				<input type="range" data-ng-model="paddingbottom" value="25" max="200" min="0"> 
+			</li>
+			<li> <div class="bt prop-head"> 
+					<span class="glyphicon glyphicon-arrow-up"> </span> <span class="badge pull-right">{{paddingleft}}</span> padding-left 
+				</div> 
+				<input type="range" data-ng-model="paddingleft" value="25" max="200" min="0">
+			</li>	
+		</ul>
+	</div>
+	<div class="col-md-9 output">
+		<div class="box" ng-style="{'padding-top': paddingtop+'px','padding-right':paddingright+'px','padding-bottom':paddingbottom+'px', 'padding-left':paddingleft+'px'}">
+		Top padding = {{paddingtop}} <br>
+		Right padding = {{paddingright}} <br>
+		Bottom padding = {{paddingbottom}} <br>
+		Left padding = {{paddingleft}} <br>
+		</div>
+	</div>

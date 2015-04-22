@@ -1,0 +1,162 @@
+<script>
+						$("#text-color").spectrum({
+							color: "#fff",
+							showInput: true,
+							preferredFormat: "hex",
+							move: updatecolor,
+						});
+						function updatecolor(color) {
+							$('#button').css('color',color);
+						}
+						$("#background-color").spectrum({
+							color: "#d9000e",
+							showInput: true,
+							preferredFormat: "hex",
+							move: updatebgcolor,
+						});
+						function updatebgcolor(color) {
+							$('#button').css('background',color);
+						}
+						$("#border-color").spectrum({
+							color: "#111",
+							showInput: true,
+							preferredFormat: "hex",
+							move: updatebordercolor,
+						});
+						function updatebordercolor(color) {
+							$('#button').css('border-color',color);
+						}
+						$("#boxshadow-color").spectrum({
+							color: "#000",
+							showInput: true,
+							preferredFormat: "rgb",
+							showAlpha: true,
+							move: updatebscolor,
+						});
+						function updatebscolor(color) {
+							$('#button').css('box-shadow:',color);
+						}
+				</script>
+<div ng-controller="ButtonController">
+	<div class="col-md-3 range values">
+		<div class="logo white center"> <span class="glyphicon glyphicon-edit left-space"> </span> Property Value </div>
+		<ul class="nav nav-pills nav-stacked prop-val">
+			<li>
+				<div class="gt prop-head">
+					<span class="glyphicon glyphicon-arrow-up"> </span> <span class="badge at pull-right">{{height+'px'}}</span>Height
+				</div> 
+				<input type="range" value="50" data-ng-model="height" max="100" min="10"> 
+			</li>
+			<li> <div class="vt prop-head">
+				<span class="glyphicon glyphicon-arrow-right"> </span> <span class="badge bt pull-right">{{width+'px'}}</span> Width 
+				</div>
+				<input type="range" data-ng-model="width" value="25" max="300" min="40" step="2"> 
+			</li>
+			<li> <div class="bt prop-head"> 
+					<span class="glyphicon glyphicon-arrow-down"> </span> <span class="badge ct pull-right">{{buttontext}}</span> Button Text
+				</div> 
+				<input type="text" data-ng-model="buttontext" value="SIGN UP" class="form-control"> 
+			</li>
+			<li> <div class="at prop-head">
+				<span class="glyphicon glyphicon-arrow-right"> </span> <span class="badge dt pull-right">{{fontsize+'px'}}</span> Font Size
+				</div>
+				<input type="range" data-ng-model="fontsize" value="25" max="35" min="14" step="1"> 
+			</li>
+			<li> <div class="dt prop-head"> 
+					<span class="glyphicon glyphicon-arrow-down"> </span> <span class="badge mt pull-right">{{textcolor}}</span> Text color
+				</div> 
+					<input type='text' id="text-color" ng-model="textcolor">
+				<!--<input type="text" data-ng-model="color" value="#bbb" class="form-control"> --->
+			</li>
+			<li> <div class="dt prop-head"> 
+					<span class="glyphicon glyphicon-arrow-down"> </span> <span class="badge mt pull-right">{{background}}</span> Background color
+				</div> 
+				<input type="text" id="background-color" data-ng-model="background" value="#fff" class="form-control"> 
+			</li>
+			<li> <div class="bt prop-head"> 
+					<span class="glyphicon glyphicon-arrow-down"> </span> <span class="badge pull-right">{{border}}</span> Box-Shadow
+				</div> Horizontal offset -- {{hor}} <br>
+				<input type="range" data-ng-model="hor" value="0" max="30" min="0"> 
+				 Vertical offset -- {{ver}}<br>
+				<input type="range" data-ng-model="ver" value="0" max="30" min="0"> 
+				 Blur Radius -- {{blur}}<br>
+				<input type="range" data-ng-model="blur" value="0" max="30" min="0">
+				 Spread Radius -- {{spread}}<br>
+				<input type="range" data-ng-model="spread" value="0" max="30" min="0"> 
+				Shadow color -- {{shcolor}}<br>
+				<input type="text" id="boxshadow-color" data-ng-model="shcolor" value="1" max="30" min="0"> 
+			</li>
+			<li> <div class="mt prop-head"> 
+					<span class="glyphicon glyphicon-arrow-down"> </span> <span class="badge pull-right">{{border}}</span> Border
+				</div> 
+				<input type="range" data-ng-model="border" value="25" max="40" min="0"> 
+			</li>
+			<li> <div class="mt prop-head"> 
+					<span class="glyphicon glyphicon-arrow-down"> </span> <span class="badge pull-right">{{bordercolor}}</span> Border color
+				</div> 
+				<input type="text" id="border-color" value="#bbb" data-ng-model="bordercolor"> 
+			</li>
+			<li> <div class="mt prop-head"> 
+					<span class="glyphicon glyphicon-arrow-down"> </span> <span class="badge pull-right"></span> Border Radius
+				</div> border-radius : {{b_radius}} <br>
+				<input type="range" data-ng-model="b_radius" value="25" max="80" min="0">
+				border-top-left-radius: {{bordertopleft}} <br>
+				<input type="range" data-ng-model="bordertopleft" value="25" max="100" min="0">
+						border-top-right-radius: {{bordertopright}} <br>
+				<input type="range" data-ng-model="bordertopright" value="25" max="100" min="0">
+						border-bottom-right-radius: {{borderbottomright}} <br>
+				<input type="range" data-ng-model="borderbottomright" value="25" max="100" min="0">
+						border-bottom-left-radius: {{borderbottomleft}} <br>
+				<input type="range" data-ng-model="borderbottomleft" value="25" max="100" min="0"> 
+				 
+			</li>
+		</ul>
+	</div>
+	<div class="col-md-9 output">
+		<button id="button" class="btn" style="margin:100px 200px; outline:0;"  ng-style="{'height': height+'px','width':width+'px', 'color': textcolor, 'font-size':fontsize+'px',
+					'background':background, 'border':border+'px solid', 'border-color':bordercolor,
+					'border-radius':b_radius+'px',
+					'box-shadow':hor+'px '+ver+'px '+blur+'px '+spread+'px '+shcolor,
+					'border-top-left-radius': bordertopleft+'px',
+					'border-top-right-radius': bordertopright+'px',
+					'border-bottom-right-radius': borderbottomright+'px',
+					'border-bottom-left-radius': borderbottomleft+'px'
+					}">
+		{{buttontext}}
+		</button>
+	</div>
+	<div class="col-md-9 codes">
+	 <section ng-controller="CodePanel as panel">
+		<ul class="nav nav-pills" ng-init="tab=1">
+			<li ng-class="{active:panel.isSelected(1)}"> <a href ng-click="panel.SelectTab(1)"> HTML </a> </li>
+			<li ng-class="{active:panel.isSelected(2)}"> <a href ng-click="panel.SelectTab(2)"> CSS </a> </li>
+		</ul>
+		<div class="panel">
+			<textarea rows="8" class="form-control" ng-show="panel.isSelected(1)">
+<!-- Add the bootstrap 3 css file in your head tag -->
+
+<button class="btn button-gen"> {{buttontext}} </button>
+			</textarea>
+		</div>
+		<div class="panel">
+<div class="form-control"  ng-show="panel.isSelected(2)" style="height:250px;">
+.button-gen {
+	height: {{height+'px;'}}
+	width: {{width+'px;'}}
+	color: {{textcolor+';'}}
+	font-size: {{fontsize+'px;'}}
+	background: {{background+';'}}
+	{{border !=0 ? 'border: '+ border +'px solid '+ bordercolor +';':''}}
+    {{borderradius != 0 ? 'border-radius:'+ borderradius +'px;':''}}
+	{{ blur!=0 && spread!=0 && shcolor ? 'box-shadow:'+ hor +'px '+ver+'px '+blur+'px '+spread+'px '+ shcolor + ';':'' }}
+	{{ bordertopleft != 0? 'border-top-left-radius:'+ bordertopleft+'px;' :''}}
+	{{bordertopright !=  0? 'border-top-right-radius: '+ bordertopright+'px;' :''}}
+	{{borderbottomright !=  0? 'border-bottom-right-radius:'+ borderbottomright+'px;' :''}}
+	{{borderbottomleft !=  0? 'border-bottom-left-radius:'+ borderbottomleft+'px;' :''}}								
+}		
+</div>
+		</div>
+	  </section>
+	</div>
+	
+</div>

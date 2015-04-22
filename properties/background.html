@@ -1,0 +1,98 @@
+<script>
+						$("#color-1").spectrum({
+							color: "#fff",
+							showInput: true,
+							preferredFormat: "hex",
+							move: updatecolor,
+						});
+						function updatecolor(color) {
+							$('#background-gradient').css('color',color);
+						}
+						$("#color-2").spectrum({
+							color: "#d9000e",
+							showInput: true,
+							preferredFormat: "hex",
+							move: updatebgcolor,
+						});
+						function updatebgcolor(color) {
+							$('#background-gradient').css('background',color);
+						}
+						
+				</script>
+<div ng-controller="BackgroundController">
+	<div class="col-md-3 range values">
+		<div class="logo white center"> <span class="glyphicon glyphicon-edit left-space"> </span> Property Value </div>
+		<ul class="nav nav-pills nav-stacked prop-val">
+			<li>
+				<div class="at prop-head">
+					<span class="glyphicon glyphicon-arrow-up"> </span> <span class="badge ct pull-right">{{gradient}}</span>Gradient Type
+				</div> 
+				<select ng-model="gradient" class="form-control">
+					<option value="linear"> Linear Gradient </option>
+					<option value="radial"> Radial Gradient </option>
+				</select>
+			</li>
+			<li ng-show="{{gradient=='linear'}}">
+				<div class="mt prop-head">
+					<span class="glyphicon glyphicon-arrow-up"> </span> <span class="badge gt pull-right">{{startfrom+'deg'}}</span>Start from
+				</div> 
+				<input type="range" value="50" ng-model="startfrom" max="360" min="0"> 
+			</li>
+			<li ng-show="{{gradient=='linear'}}">
+				<div class="mt prop-head">
+					<span class="glyphicon glyphicon-arrow-up"> </span> <span class="badge gt pull-right">{{centerrad+'px'}}</span>Start from
+				</div> 
+				<input type="range" value="50" ng-model="centerrad" max="100" min="0"> 
+			</li>
+			<li> 
+				<div class="vt prop-head">
+					<span class="glyphicon glyphicon-arrow-right"> </span> <span class="badge bt pull-right">{{color1}}</span> Color 1
+				</div>
+				<input type="text" id="color-1" ng-model="color1" value="#fff">
+			</li>
+			<li> 
+				<div class="vt prop-head">
+					<span class="glyphicon glyphicon-arrow-right"> </span> <span class="badge bt pull-right">{{color2}}</span> Color 2
+				</div>
+				<input type="text" id="color-2" ng-model="color2" value="#fff">
+			</li>
+		</ul>
+	</div>
+	<div class="col-md-9 output">
+		<div id="background-gradient" style="margin:40px 200px; min-height:300px; min-width:300px; background:#000; outline:0;"  
+		     ng-style="{'background':'-webkit-linear-gradient('+startfrom+'deg,'+color1+','+color2+')',
+						'background':'-moz-linear-gradient('+startfrom+'deg,'+color1+','+color2+')',
+						'background':'-ms-linear-gradient('+startfrom+'deg,'+color1+','+color2+')',
+						'background':'linear-gradient('+startfrom+'deg,'+color1+','+color2+')'
+					}" >
+		</div>
+	</div>
+	<div class="col-md-9 codes">
+	 <section ng-controller="CodePanel as panel">
+		<ul class="nav nav-pills" ng-init="tab=1">
+			<li ng-class="{active:panel.isSelected(1)}"> <a href ng-click="panel.SelectTab(1)"> HTML </a> </li>
+			<li ng-class="{active:panel.isSelected(2)}"> <a href ng-click="panel.SelectTab(2)"> CSS </a> </li>
+		</ul>
+		<div class="panel">
+			<textarea rows="8" class="form-control" ng-show="panel.isSelected(1)">
+<!-- Add the bootstrap 3 css file in your head tag -->
+
+<div class="background-gen"> </div>
+			</textarea>
+		</div>
+		<div class="panel">
+<div class="form-control"  ng-show="panel.isSelected(2)" style="height:250px;">
+.background-gen {
+	min-height: 100px;
+	min-width: 300px;
+	{{ gradient == 'linear' ? 'background:-webkit-'+ gradient +'-gradient('+ startfrom +'deg,'+color1+','+color2+');':'background:-webkit-'+ gradient +'-gradient('+centerrad+'px '+centerrad+'px,'+color1+','+color2+');' }}							
+	{{ gradient == 'linear' ? 'background:-moz-'+ gradient +'-gradient('+ startfrom +'deg,'+color1+','+color2+');':'background:-moz-'+ gradient +'-gradient('+centerrad+'px '+centerrad+'px,'+color1+','+color2+');' }}
+	{{ gradient == 'linear' ? 'background:-ms-'+ gradient +'-gradient('+ startfrom +'deg,'+color1+','+color2+');':'background:-ms-'+ gradient +'-gradient('+centerrad+'px '+centerrad+'px,'+color1+','+color2+');' }}
+	{{ gradient == 'linear' ? 'background:'+ gradient +'-gradient('+ startfrom +'deg,'+color1+','+color2+');':'background:'+ gradient +'-gradient('+centerrad+'px '+centerrad+'px,'+color1+','+color2+');' }}
+	}		
+</div>
+		</div>
+	  </section>
+	</div>
+	
+</div>

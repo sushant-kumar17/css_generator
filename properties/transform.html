@@ -1,0 +1,98 @@
+<script>
+						$("#boxshadow-color").spectrum({
+							color: "rgba(200,10,43,0.6)",
+							showInput: true,
+							preferredFormat: "rgb",
+							showAlpha: true,
+						});
+						$("#background-color").spectrum({
+							color: "#90dcc6",
+							showInput: true,
+							preferredFormat: "hex",
+							showAlpha: true,
+							move: updatecolor,
+						});
+						function updatecolor(color) {
+							$('#bshadow').css('background',color);
+						}
+						
+				</script>
+<div ng-controller="TransformController">
+	<div class="col-md-3 range values">
+		<div class="logo white center"> <span class="glyphicon glyphicon-edit left-space"> </span> Property Value </div>
+		<ul class="nav nav-pills nav-stacked prop-val">
+			<li> <div class="bt prop-head"> 
+					<span class="glyphicon glyphicon-arrow-down"> </span> <span class="badge pull-right">{{translateX+'px '+translateY+'px'}}</span> Translate
+				</div> translateX -- <span> <select ng-model="posX"> <option value="">(+)ve</option><option value="-">(-)ve</option> </select></span>{{translateX}} <br>
+				<input type="range" data-ng-model="translateX" value="0" max="200" min="0"> 
+				 translateY -- <span> <select ng-model="posY"> <option value="">(+)ve</option><option value="-">(-)ve</option> </select></span>{{translateY}}<br>
+				<input type="range" data-ng-model="translateY" value="0" max="200" min="0"> 
+
+			</li>
+			<li> <div class="bt prop-head"> 
+					<span class="glyphicon glyphicon-arrow-down"> </span> <span class="badge pull-right">{{skewX+'deg '+skewY+'deg'}}</span>Skew
+				  </div>
+				skewX -- <span> <select ng-model="positiveX"> <option value="">(+)ve</option><option value="-">(-)ve</option> </select></span>{{positiveX+skewX+'deg'}} <br>
+				<input type="range" data-ng-model="skewX" value="0" max="180" min="0"> 
+				 skewY -- <span> <select ng-model="positiveY"> <option value="">(+)ve</option><option value="-">(-)ve</option> </select></span>{{positiveY+skewY+'deg'}}<br>
+				<input type="range" data-ng-model="skewY" value="0" max="180" min="0"> 
+			</li>
+			<li> <div class="dt prop-head"> 
+					<span class="glyphicon glyphicon-arrow-down"> </span> <span class="badge mt pull-right">
+					<span> <select ng-model="posr"> <option value="">(+)ve</option><option value="-">(-)ve</option> </select></span>
+					{{posr+rotate+'deg'}}</span> Rotate
+				</div> 
+				<input type="range" data-ng-model="rotate" value="0" max="180" min="0"> 
+			</li>
+			<li> <div class="dt prop-head"> 
+					<span class="glyphicon glyphicon-arrow-down"> </span> <span class="badge mt pull-right">{{scale}}</span>
+					<span> <select ng-model="negs"> <option value="">(+)ve</option><option value="-">(-)ve</option> </select></span> Scale
+				</div> 
+				<input type="range" ng-model="scale" value="0" max="3" min="0" step="0.2">  
+			</li>
+			<li> <div class="dt prop-head"> 
+					<span class="glyphicon glyphicon-arrow-down"> </span> <span class="badge mt pull-right">{{background}}</span> Background color
+				</div> 
+				<input type="text" id="background-color" data-ng-model="background" value="#fff" class="form-control"> 
+			</li>
+		</ul>
+	</div>
+	<div class="col-md-9 output">
+		<div style="margin:100px 200px; padding:30px; min-height:150px; width:200px; background:#fff; border:2px dashed #111;z-index:-1;"> 
+			This is simple div
+		</div>
+		<div id="bshadow" style="margin:100px 200px; position:absolute; top:0; padding:30px; min-height:150px; width:200px; background:transparent; outline:0; z-index:1; border:2px solid #000;"  
+		     ng-style="{'-webkit-transform':'translateX('+posX+translateX+'px) translateY('+posY+translateY+'px)
+								skewX('+positiveX+skewX+'deg) skewY('+positiveY+skewY+'deg) rotate('+posr+rotate+'deg) scale('+negs+scale+')',
+						'transform':'translateX('+posX+translateX+'px) translateY('+posY+translateY+'px) 
+								skewX('+positiveX+skewX+'deg) skewY('+positiveY+skewY+'deg) rotate('+posr+rotate+'deg) scale('+negs+scale+')'
+						}" >
+				This is simple div new and transformed
+		</div>
+	</div>
+	<div class="col-md-9 codes">
+	 <section ng-controller="CodePanel as panel">
+		<ul class="nav nav-pills" ng-init="tab=1">
+			<li ng-class="{active:panel.isSelected(1)}"> <a href ng-click="panel.SelectTab(1)"> HTML </a> </li>
+			<li ng-class="{active:panel.isSelected(2)}"> <a href ng-click="panel.SelectTab(2)"> CSS </a> </li>
+		</ul>
+		<div class="panel">
+			<textarea rows="8" class="form-control" ng-show="panel.isSelected(1)">
+<!-- Add the bootstrap 3 css file in your head tag -->
+
+<div class="boxShadow-gen"> </div>
+			</textarea>
+		</div>
+		<div class="panel">
+<div class="form-control"  ng-show="panel.isSelected(2)" style="height:250px;">
+.transform-gen {
+	min-height: 100px;
+	min-width: 300px;
+	{{ '-webkit-transform:'+ translateX?'translateX('+posX+translateX+'px)':'' }} {{ translateY ? 'translateY('+posY+translateY+'px)':'' }} {{ skewX ? 'skewX('+positiveX+skewX+'deg)':'' }} {{ skewY ? 'skewY('+positiveY+skewY+'deg)':'' }} {{ rotate ? 'rotate('+posr+rotate+'deg)' :'' }}{{ scale ? 'scale('+negs+scale+')':'' }}
+}		
+</div>
+		</div>
+	  </section>
+	</div>
+	
+</div>

@@ -1,0 +1,82 @@
+<script>
+						$("#boxshadow-color").spectrum({
+							color: "rgba(200,10,43,0.6)",
+							showInput: true,
+							preferredFormat: "rgb",
+							showAlpha: true,
+						});
+						$("#background-color").spectrum({
+							color: "#90dcc6",
+							showInput: true,
+							preferredFormat: "hex",
+							showAlpha: true,
+							move: updatecolor,
+						});
+						function updatecolor(color) {
+							$('#bshadow').css('background',color);
+						}
+						
+				</script>
+<div ng-controller="BoxShadowController">
+	<div class="col-md-3 range values">
+		<div class="logo white center"> <span class="glyphicon glyphicon-edit left-space"> </span> Property Value </div>
+		<ul class="nav nav-pills nav-stacked prop-val">
+			<li> <div class="bt prop-head"> 
+					<span class="glyphicon glyphicon-arrow-down"> </span> <span class="badge pull-right">{{blur+'px '+spread+'px'}}</span> Box-Shadow
+				</div> Horizontal offset -- {{hor}} <br>
+				<input type="range" data-ng-model="hor" value="0" max="30" min="0"> 
+				 Vertical offset -- {{ver}}<br>
+				<input type="range" data-ng-model="ver" value="0" max="30" min="0"> 
+				 Blur Radius -- {{blur}}<br>
+				<input type="range" data-ng-model="blur" value="0" max="30" min="0">
+				 Spread Radius -- {{spread}}<br>
+				<input type="range" data-ng-model="spread" value="0" max="30" min="0"> 
+				Shadow color -- {{shcolor}}<br>
+				<input type="text" id="boxshadow-color" data-ng-model="shcolor" value="1" max="30" min="0"> 
+			</li>
+			<li> <div class="bt prop-head"> 
+					<span class="glyphicon glyphicon-arrow-down"> </span> <span class="badge pull-right">{{inset}}</span>inset
+				  </div>
+				<select ng-model="inset" class="form-control">
+					<option value="inset">True </option>
+					<option value=""> Flase </option>
+				</select>
+			</li>
+			<li> <div class="dt prop-head"> 
+					<span class="glyphicon glyphicon-arrow-down"> </span> <span class="badge mt pull-right">{{background}}</span> Background color
+				</div> 
+				<input type="text" id="background-color" data-ng-model="background" value="#fff" class="form-control"> 
+			</li>
+		</ul>
+	</div>
+	<div class="col-md-9 output">
+		<div id="bshadow" style="margin:100px 200px; min-height:100px; min-width:200px; background:#90dcc6; outline:0;"  
+		     ng-style="{'box-shadow':inset+' '+hor+'px '+ver+'px '+blur+'px '+spread+'px '+shcolor }" >
+		</div>
+	</div>
+	<div class="col-md-9 codes">
+	 <section ng-controller="CodePanel as panel">
+		<ul class="nav nav-pills" ng-init="tab=1">
+			<li ng-class="{active:panel.isSelected(1)}"> <a href ng-click="panel.SelectTab(1)"> HTML </a> </li>
+			<li ng-class="{active:panel.isSelected(2)}"> <a href ng-click="panel.SelectTab(2)"> CSS </a> </li>
+		</ul>
+		<div class="panel">
+			<textarea rows="8" class="form-control" ng-show="panel.isSelected(1)">
+<!-- Add the bootstrap 3 css file in your head tag -->
+
+<div class="boxShadow-gen"> </div>
+			</textarea>
+		</div>
+		<div class="panel">
+<div class="form-control"  ng-show="panel.isSelected(2)" style="height:250px;">
+.boxShadow-gen {
+	min-height: 100px;
+	min-width: 300px;
+	{{ blur!=0 && shcolor ? 'box-shadow:'+inset+' '+ hor +'px '+ver+'px '+blur+'px '+spread+'px '+ shcolor + ';':'' }}
+}		
+</div>
+		</div>
+	  </section>
+	</div>
+	
+</div>

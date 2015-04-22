@@ -1,0 +1,120 @@
+@font-face {
+	font-family:"CorbertCondensed-Italic";
+	src:url(fonts/CorbertCondensed-Italic.otf);
+}
+body { margin-left:15px; }
+-webkit-scrollbar {
+	width:6px;
+}
+.sidebar { 
+	background:#333537;	
+	height:700px;
+	overflow:scroll;
+	text-align:center;
+	position:fixed; left:0; width:18%;
+}
+.sidebar a { 
+	color:#7b858e; 
+	font-family:"CorbertCondensed-Italic","nice";
+}
+.nav {
+	text-align:left;
+}
+.nav > li > a:hover, .nav > li > a:focus {
+	background:#434A54;
+	color:#fff;
+}
+.left-space {
+	position:relative;
+	right:4px;
+}
+
+.logo {
+	color:#fff;
+	font-family:"CorbertCondensed-Italic","nice";
+	font-size:16px;
+	padding:20px 0px;
+}
+
+.range { 
+	background:#F5F7FA;
+	position:fixed; 
+	width:20%;
+	height:650px;
+	overflow:scroll;
+	left:17%;
+}
+.values {
+	padding:0;overflow-y:scroll;
+}
+.output {
+	width:63%;
+	background:rgba(215, 223, 234, 0.34);
+	max-height:400px;
+	overflow:hidden;
+	position:fixed;
+	top:0; left:505px;
+}
+.codes {
+	width:63%; bottom:0;right:0; position:fixed; height:350px;
+}
+.main { 
+	width:100%;
+}
+.box { 
+	height:200px;
+	width:400px;
+	background:#FDEEEE;
+	margin:100px 200px;
+	padding:50px;
+	clear:both;
+}
+.black { 
+	color:#111;
+} 
+.white { 
+	color:#fff; 
+	background:#48CFAD;
+}
+.center { 
+	text-align:center;
+}
+
+/* ====== Property values Styles overwrite ========*/
+.prop-val {
+	margin:15px;
+	border-radius:5px; 
+	font-family:"CorbertCondensed-Italic";
+}
+.range ul li { 
+	margin-top:14px; 
+	border-radius:2px; 
+	border-bottom:1px solid #f1f1f1;
+	background:#fff;
+	text-align:center; 
+	-webkit-transition:box-shadow ease 0.5s; 
+	-moz-transition:box-shadow ease 0.5s; 
+	transition:box-shadow ease 0.5s; 
+}
+.range ul li:hover{
+	box-shadow:1px 0px 5px 2.5px rgba(200,200,200,0.5);
+	-webkit-transition:box-shadow ease 0.5s;
+	-moz-transition:box-shadow ease 0.5s; 
+	transition:box-shadow ease 0.5s; 
+}
+.range ul li input[type=range] { 
+	margin-top:10px; 
+	width:200px; 
+}
+
+/* ====== Property values head colors ========*/
+
+.prop-head { color:#fff; padding:4px; border-top-left-radius:4px; border-top-right-radius:4px; }
+.gt { background:#264348; }
+.mt { background:#DA4453; }
+.bt { background:#006442; }
+.vt { background:#F6BB42; }
+.ct { background:#F62459; }
+.lt { background:#967ADC; }
+.at { background:#3BAFDA; }
+.dt { background:#E9573F; }

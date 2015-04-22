@@ -1,0 +1,141 @@
+<script>
+						$("#text-color").spectrum({
+							color: "#fff",
+							showInput: true,
+							preferredFormat: "hex",
+							move: updatecolor,
+						});
+						function updatecolor(color) {
+							$('#input').css('color',color);
+						}
+						$("#background-color").spectrum({
+							color: "#d9000e",
+							showInput: true,
+							preferredFormat: "hex",
+							move: updatebgcolor,
+						});
+						function updatebgcolor(color) {
+							$('#input').css('background',color);
+						}
+						$("#border-color").spectrum({
+							color: "#111",
+							showInput: true,
+							preferredFormat: "hex",
+							move: updatebordercolor,
+						});
+						function updatebordercolor(color) {
+							$('#input').css('border-color',color);
+						}
+						$("#boxshadow-color").spectrum({
+							color: "#000",
+							showInput: true,
+							preferredFormat: "rgb",
+							showAlpha: true,
+							move: updatebscolor,
+						});
+						function updatebscolor(color) {
+							$('#input').css('box-shadow:',color);
+						}
+				</script>
+<div ng-controller="InputController">
+	<div class="col-md-3 range values">
+		<div class="logo white center"> <span class="glyphicon glyphicon-edit left-space"> </span> Property Value </div>
+		<ul class="nav nav-pills nav-stacked prop-val">
+			<li>
+				<div class="at prop-head">
+					<span class="glyphicon glyphicon-arrow-up"> </span> <span class="badge pull-right">{{height+'px'}}</span>Height
+				</div> 
+				<input type="range" data-ng-model="height" value="25" max="100" min="10"> 
+			</li>
+			<li> <div class="bt prop-head">
+				<span class="glyphicon glyphicon-arrow-right"> </span> <span class="badge pull-right">{{width+'px'}}</span> Width 
+				</div>
+				<input type="range" data-ng-model="width" value="25" max="300" min="40" step="2"> 
+			</li>
+			<li> <div class="dt prop-head">
+				<span class="glyphicon glyphicon-arrow-right"> </span> <span class="badge pull-right">{{fontsize+'px'}}</span> Font Size
+				</div>
+				<input type="range" data-ng-model="fontsize" value="25" max="35" min="14" step="1"> 
+			</li>
+			<li> <div class="vt prop-head"> 
+					<span class="glyphicon glyphicon-arrow-down"> </span> <span class="badge pull-right">{{textcolor}}</span> Text color
+				</div> 
+				<input type='text' id="text-color" ng-model="textcolor">
+			</li>
+			<li> <div class="gt prop-head"> 
+					<span class="glyphicon glyphicon-arrow-down"> </span> <span class="badge pull-right">{{background}}</span> Background color
+				</div> 
+				<input type='text' id="background-color" ng-model="background">
+			</li>
+			<li> <div class="mt prop-head"> 
+					<span class="glyphicon glyphicon-arrow-down"> </span> <span class="badge pull-right">{{blur+'px '+spread+'px'}}</span> Box-Shadow
+				</div> Horizontal offset -- {{hor}} <br>
+				<input type="range" data-ng-model="hor" value="1" max="30" min="0"> 
+				 Vertical offset -- {{ver}}<br>
+				<input type="range" data-ng-model="ver" value="1" max="30" min="0"> 
+				 Blur Radius -- {{blur}}<br>
+				<input type="range" data-ng-model="blur" value="1" max="30" min="0">
+				 Spread Radius -- {{spread}}<br>
+				<input type="range" data-ng-model="spread" value="1" max="30" min="0"> 
+				Shadow color -- {{shcolor}}<br>
+				<input type="text" id="boxshadow-color" data-ng-model="shcolor" value="1" max="30" min="0"> 
+			</li>
+			<li> <div class="bt prop-head"> 
+					<span class="glyphicon glyphicon-arrow-down"> </span> <span class="badge pull-right">{{border}}</span> border
+				</div> 
+				<input type="range" data-ng-model="border" value="25" max="40" min="0"> 
+			</li>
+			<li> <div class="bt prop-head"> 
+					<span class="glyphicon glyphicon-arrow-down"> </span> <span class="badge pull-right">{{bordercolor}}</span> border-color
+				</div> 
+				<input type="text" value="#bbb" data-ng-model="bordercolor" class="form-control"> 
+			</li>
+			<li> <div class="bt prop-head"> 
+					<span class="glyphicon glyphicon-arrow-down"> </span> <span class="badge pull-right">{{borderradius}}</span> border-radius
+				</div> border-radius : {{borderradius}} <br>
+				<input type="range" data-ng-model="borderradius" value="25" max="80" min="0">
+			</li>
+		</ul>
+	</div>
+	<div class="col-md-9 output">
+		<input id="input" class="form-control" style="margin:100px 200px; width:200px;"  ng-style="{'height': height+'px','width':width+'px', 'color': textcolor, 
+					'font-size':fontsize+'px',
+					'background':background, 'border':border+'px solid', 'border-color':bordercolor, 'border-radius':borderradius+'px',
+					'box-shadow':hor+'px '+ver+'px '+blur+'px '+spread+'px '+shcolor,
+					'border-top-left-radius': bordertopleft+'px',
+					'border-top-right-radius': bordertopright+'px',
+					'border-bottom-right-radius': borderbottomright+'px',
+					'border-bottom-left-radius': borderbottomleft+'px'}"
+		placeholder="Enter your text">
+	</div>
+	<div class="col-md-9 codes">
+	 <section ng-controller="CodePanel as panel">
+		<ul class="nav nav-pills" ng-init="tab=1">
+			<li ng-class="{active:panel.isSelected(1)}"> <a href ng-click="panel.SelectTab(1)"> HTML </a> </li>
+			<li ng-class="{active:panel.isSelected(2)}"> <a href ng-click="panel.SelectTab(2)"> CSS </a> </li>
+		</ul>
+		<div class="panel">
+			<textarea rows="8" class="form-control" ng-show="panel.isSelected(1)">
+<!-- Add the bootstrap 3 css file in your head tag -->
+
+<input type="text" class="form-control input-gen" placeholder="Enter some text in the box">
+			</textarea>
+		</div>
+		<div class="panel">
+<div class="form-control"  ng-show="panel.isSelected(2)" style="height:250px;">
+.input-gen {
+	height: {{height+'px;'}}
+	width: {{width+'px;'}}
+	color: {{textcolor+';'}}
+	font-size: {{fontsize+'px;'}}
+	background: {{background+';'}}
+	{{border !=0 ? 'border: '+ border +'px solid '+ bordercolor +';':''}}
+    {{borderradius != 0 ? 'border-radius:'+ borderradius +'px;':''}}
+	{{ blur!=0 && spread!=0 && shcolor ? 'box-shadow:'+ hor +'px '+ver+'px '+blur+'px '+spread+'px '+ shcolor + ';':'' }}						
+}		
+</div>
+		</div>
+	  </section>
+	</div>
+</div>
+	

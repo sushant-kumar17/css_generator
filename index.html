@@ -1,0 +1,146 @@
+<!--- AngularJS web app--->
+<!DOCTYPE html>
+<html ng-app="generator">
+<head>
+    <title>AngularJS Demos</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+	<link href="css/spectrum.css" rel="stylesheet" />
+	<link href="css/angular_app.css" rel="stylesheet" />
+	
+	<script src="js/jquery.min.js"></script>    
+    <script src="js/angular.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+	 <script src="js/spectrum.js"></script>
+
+    <script>
+	baseurl = '/properties/';
+    var gen = angular.module("generator",[]);
+	// Controller for button 
+	gen.controller('ButtonController',function($scope) {
+		$scope.height = '50';
+		$scope.width = '200';
+		$scope.fontsize = '16';
+		$scope.buttontext = 'SIGN UP';
+		$scope.textcolor = '#fff';
+		$scope.background = '#d9000e';
+		$scope.border = '0';
+		$scope.spread = '0';	// Box-shadow spread
+		$scope.blur = '0';   // Box-shadow blur radius
+		$scope.b_radius = '0';
+		$scope.bordertopleft = '0';
+		$scope.bordertopright = '0';
+		$scope.borderbottomleft = '0';
+		$scope.borderbottomright = '0';
+	});
+	
+	//Controller for input box
+	gen.controller('InputController', function($scope) {
+		$scope.height = '30';
+		$scope.width = '200';
+		$scope.fontsize = '16';
+		$scope.textcolor = '#000';
+		$scope.background = '#fff';
+		$scope.border = '0';
+		$scope.spread = '0';	// Box-shadow spread
+		$scope.blur = '0';   // Box-shadow blur radius
+	});
+
+	// Background controller
+	gen.controller('BackgroundController', function($scope) {
+		$scope.gradient = 'linear';
+	
+	});
+	gen.controller('BoxShadowController', function($scope) {
+		$scope.hor = '2';
+		$scope.ver = '2';
+		$scope.blur = '5';
+		$scope.spread = '6';
+		$scope.shcolor = 'rgba(200,10,43,0.6)';
+	});
+	gen.controller('TextShadowController', function($scope) {
+		$scope.hor = '2';
+		$scope.ver = '2';
+		$scope.blur = '5';
+		$scope.spread = '6';
+		$scope.shcolor = 'rgba(200,10,43,0.6)';
+	});
+	gen.controller('TransformController',function($scope) {
+		$scope.translateX = '0';
+		$scope.translateY = '0';
+		$scope.translateZ = '0';
+		$scope.skewX = '0';
+		$scope.skewY = '0';
+		$scope.positiveX = '';  //For initialising the skewX as positive
+		$scope.positiveY = '';
+		$scope.posX = '';		//For initialising the transformX as positive
+		$scope.posY = '';
+		$scope.negs = '';
+		$scope.rotate = "0";
+		$scope.posr = ' ';
+		$scope.scale = "1";
+	});
+	gen.controller('CodePanel',function() {
+		this.tab = 1;
+		this.SelectTab = function(SetTab) {
+			this.tab = SetTab;
+		};
+		this.isSelected = function(checkTab) {
+			return this.tab === checkTab;
+		};
+	});
+	gen.controller('routeController', function($scope, $templateCache, $http, $location) {
+		
+		$scope.template = '';
+		$scope.html = '';
+		$scope.pages = [
+			{title: 'Margin:',url: baseurl + 'margin.html',badge: '4'},
+			{title: 'Padding:',url: baseurl + 'padding.html',badge: '4'},
+			{title: 'Button:',url: baseurl + 'button.html',badge: '18'},
+			{title: 'Background:',url: baseurl + 'Background.html',badge: '5'},
+			{title: 'Box-shadow:',url: baseurl + 'box-shadow.html',badge: '7'},
+			{title: 'Text-shadow:',url: baseurl + 'text-shadow.html',badge: '6'},
+			{title: 'Input box:',url: baseurl + 'input.html',badge: '13'},
+			{title: '-webkit-transform:',url: baseurl + 'transform.html',badge: '7'}
+		];
+		
+		$scope.loadpage = function(page) {
+			if(page.href)
+				document.location = page.href
+			$scope.template = page.url;
+			$http({ method: 'GET', url: page.url, cache: $templateCache })
+                  .success(function (html) {
+                      $scope.html = html;
+                  })
+				  .error(function (html, status) {
+                      $scope.html = 'Unable to load code: ' + status;
+                  });
+		
+		}
+		$scope.loadpage($scope.pages[6]);
+	});	
+			
+			
+    </script>
+</head>
+<body data-ng-controller="routeController">
+<div class="">
+  <div class="row main">
+	<div class="col-md-2 sidebar">
+		<div class="logo"> <span class=" glyphicon glyphicon-th-list left-space"> </span> CSS Properties </div>
+		<ul class="nav nav-pills nav-stacked">
+		 <li> <input type="text" class="form-control" placeholder="Search"> </li>
+		 <li data-ng-repeat = "page in pages"> <a href="{{href}}" ng-click="loadpage(page)"> 
+				<span class=" glyphicon glyphicon-hand-left left-space"></span> <span class="badge pull-right">{{page.badge}}</span> {{page.title}} </a>
+		</li>
+		</ul>
+	</div>
+	<div class="col-md-10 range" style="height:700px; padding:0 ;">
+		<div class="row main">
+			<ng-include src="template"></ng-include>
+		</div>
+	</div>
+  </div>
+</div>  
+   
+</body>
+</html>

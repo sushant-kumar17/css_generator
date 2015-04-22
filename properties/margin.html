@@ -1,0 +1,34 @@
+	<div class="col-md-3 range" style="height:700px; padding:0 ;">
+		<div class="logo white center"> <span class="glyphicon glyphicon-edit left-space"> </span> Property Value </div>
+		<ul class="nav nav-pills nav-stacked prop-val">
+			<li>
+				<div class="mt prop-head">
+					<span class="glyphicon glyphicon-arrow-up"> </span> <span class="badge pull-right">{{margintop}}</span>Margin-top 
+				</div> 
+				<input type="range" data-ng-model="margintop" value="25" max="200" min="0"> 
+			</li>
+			<li> <div class="gt prop-head">
+				<span class="glyphicon glyphicon-arrow-right"> </span> <span class="badge pull-right">{{marginright}}</span> Margin-Right 
+				</div>
+				<input type="range" data-ng-model="marginright" value="25" max="200" min="0"> 
+			</li>
+			<li> <div class="vt prop-head"> 
+					<span class="glyphicon glyphicon-arrow-down"> </span> <span class="badge pull-right">{{marginbottom}}</span> Margin-Bottom 
+				</div> 
+				<input type="range" data-ng-model="marginbottom" value="25" max="200" min="0"> 
+			</li>
+			<li> <div class="bt prop-head"> 
+					<span class="glyphicon glyphicon-arrow-up"> </span> <span class="badge pull-right">{{marginleft}}</span> Margin-left 
+				</div> 
+				<input type="range" data-ng-model="marginleft" value="25" max="200" min="0">
+			</li>	
+		</ul>
+	</div>
+	<div class="col-md-9 output">
+		<div class="box" ng-style="{'margin-top': margintop+'px','margin-right':marginright+'px','margin-bottom':marginbottom+'px', 'margin-left':marginleft+'px'}">
+		Top margin = {{margintop}} <br>
+		Right margin = {{marginright}} <br>
+		Bottom margin = {{margintop}} <br>
+		Left margin = {{marginleft}} <br>
+		</div>
+	</div>
